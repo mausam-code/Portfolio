@@ -1,0 +1,25 @@
+# Virtualenv
+venv/
+.env/
+env/
+
+# Python
+*.pyc
+__pycache__/
+
+# Django
+*.sqlite3
+db.sqlite3
+*.log
+
+# VS Code or other IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Static/media collected files
+/static/
+/media/
+/node_modules/
