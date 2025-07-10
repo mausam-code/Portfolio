@@ -151,26 +151,7 @@ def download_resume():
     # In a real app, you would serve the actual PDF file
     return jsonify({'message': 'Resume download feature - implement PDF serving'})
 
-@app.route('/admin')
-def admin_dashboard():
-    """Simple admin dashboard to view messages"""
-    try:
-        with open('messages.json', 'r') as f:
-            messages = json.load(f)
-    except FileNotFoundError:
-        messages = []
-    
-    # return render_template('admin.html', messages=messages)
 
-@app.errorhandler(404)
-def not_found(error):
-    """Custom 404 page"""
-    # return render_template('404.html'), 404
-
-@app.errorhandler(500)
-def internal_error(error):
-    """Custom 500 page"""
-    # return render_template('500.html'), 500
 
 # Add some useful template filters
 @app.template_filter('year')
