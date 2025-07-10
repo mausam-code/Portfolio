@@ -35,19 +35,19 @@ user_data = {
     ],
     'projects': [
         {
-            'title': 'E-Commerce Platform',
-            'description': 'Full-stack e-commerce solution built with Django and React, featuring user authentication, payment integration, and admin dashboard.',
+            'title': 'Seasonal Agro Farm',
+            'description': 'Full-stack solution built with Django and React, featuring user authentication, payment integration, and admin dashboard.',
             'technologies': ['Django', 'React', 'MySQL', 'Stripe API'],
-            'github': 'https://github.com/mausam-code/ecommerce-platform',
-            'demo': 'https://ecommerce-demo.com',
+            'github': 'https://github.com/mausam-code/Portfolio',
+            'demo': 'https://seasonalagrofarm.com.np',
             'image': 'ecommerce.jpg'
         },
         {
-            'title': 'Blog Platform',
+            'title': 'FOREIGN EMPLOYMENT MANAGEMENT SYSTEM',
             'description': 'Modern blogging platform with rich text editor, comment system, and social sharing features built with Flask and React.',
             'technologies': ['Flask', 'React', 'PostgreSQL', 'REST API'],
-            'github': 'https://github.com/mausam-code/blog-platform',
-            'demo': 'https://blog-demo.com',
+            'github': 'https://github.com/mausam-code/',
+            'demo': 'https://fancydecor.qa',
             'image': 'blog.jpg'
         },
         {
@@ -55,7 +55,7 @@ user_data = {
             'description': 'Data visualization dashboard with real-time analytics, interactive charts, and export functionality.',
             'technologies': ['Python', 'Django', 'MySQL', 'Chart.js'],
             'github': 'https://github.com/mausam-code/analytics-dashboard',
-            'demo': 'https://analytics-demo.com',
+            'demo': 'https://jkoverseas.com.np',
             'image': 'analytics.jpg'
         }
     ],
