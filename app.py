@@ -75,22 +75,7 @@ user_data = {
         'linkedin': 'https://linkedin.com/in/seasonsinghrajak',
         'website': 'https://season.name.np'
     },
-    'testimonials': [
-        {
-            'name': 'John Smith',
-            'position': 'Senior Developer',
-            'company': 'Tech Solutions Inc.',
-            'message': 'Season is a dedicated developer who consistently delivers high-quality code and innovative solutions.',
-            'rating': 5
-        },
-        {
-            'name': 'Sarah Johnson',
-            'position': 'Project Manager',
-            'company': 'Digital Agency',
-            'message': 'Working with Season was a pleasure. His technical skills and problem-solving abilities are exceptional.',
-            'rating': 5
-        }
-    ]
+
 }
 
 @app.route('/')
