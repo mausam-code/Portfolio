@@ -579,7 +579,7 @@ body {
 }
 
 .contact-item-text a:hover {
-    color: #8f5cff;            /* Change text color on hover (choose your accent color) */
+    color: #ffffff;            /* Change text color on hover (choose your accent color) */
     background-color: rgba(255, 255, 255, 0.1); /* Optional subtle background on hover */
     border-radius: 8px;        /* Optional rounded corners */
 }

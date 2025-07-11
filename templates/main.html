@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{user.name}}'s portfolio - {{user.title}}">
     <title>{{user.name }} | {{user.title}}</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -13,34 +12,31 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>S</text></svg>">
 </head>
 <body>
-    <!-- Skip Navigation -->
-    <a href="#main-content" class="skip-nav">Skip to main content</a>
-    
-    <nav class="nav" aria-label="Main Navigation">
+    <nav class="nav">
         <div class="nav-container">
-            <div class="nav-brand"><a href="#home" aria-label="Go to homepage">{{ user.name }}</a></div>
-            <ul class="nav-menu" id="main-menu">
-                <li><a href="#home" class="nav-link active" aria-current="page">Home</a></li>
+            <div class="nav-brand"><a href="#home">{{ user.name }}</a></div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About Me</a></li>
                 <li><a href="#companies" class="nav-link">Companies</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="#blog" class="nav-link">Blog</a></li>
             </ul>
-            <button class="mobile-nav-toggle" aria-expanded="false" aria-controls="main-menu" aria-label="Toggle navigation">
+            <div class="mobile-nav-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
-            </button>
+            </div>
         </div>
     </nav>
 
     <!-- Page Container -->
     <div class="page-container">
         <!-- Home Page -->
-        <section class="page home-page active" id="home" aria-labelledby="home-title">
+        <div class="page home-page active" id="home">
             <div class="home-content">
                 <div class="home-text">
-                    <h1 class="home-title" id="home-title">Hi, I'm <span class="gradient-text">{{ user.name }}</span></h1>
+                    <h1 class="home-title">Hi, I'm <span class="gradient-text">{{ user.name }}</span></h1>
                     <p class="home-subtitle">{{ user.bio }}</p>
                     <div class="home-buttons">
                         <a href="#companies" class="btn btn-primary">
@@ -53,30 +49,33 @@
                         </a>
                     </div>
                 </div>
-                <div class="home-visual" aria-label="Skills carousel">
+                <div class="home-visual">
                     <div class="carousel-container">
-                        <div class="carousel-slides" aria-live="polite">
-                            <div class="carousel-slide" aria-hidden="false">
+                        <div class="carousel-slides">
+                            <!-- <img src="{{ url_for('static', filename='images/python.jpg') }}" alt="Python Development" class="slide-image"> -->
+                            <div class="carousel-slide">
                                 <div class="slide-content">
-                                    <div class="slide-icon" aria-hidden="true">
+                                    <div class="slide-icon">
                                         <i class="fab fa-python"></i>
                                     </div>
                                     <h3 class="slide-title">Python Development</h3>
                                     <p class="slide-subtitle">Building robust backend solutions</p>
                                 </div>
                             </div>
-                            <div class="carousel-slide" aria-hidden="true">
+                            <div class="carousel-slide">
+                                <!-- <img src="{{ url_for('static', filename='images/react.jpg') }}" alt="React Frontend" class="slide-image"> -->
                                 <div class="slide-content">
-                                    <div class="slide-icon" aria-hidden="true">
+                                    <div class="slide-icon">
                                         <i class="fab fa-react"></i>
                                     </div>
                                     <h3 class="slide-title">React Frontend</h3>
                                     <p class="slide-subtitle">Creating dynamic user interfaces</p>
                                 </div>
                             </div>
-                            <div class="carousel-slide" aria-hidden="true">
+                            <div class="carousel-slide">
+                                <!-- <img src="{{ url_for('static', filename='images/database.jpg') }}" alt="Database Design" class="slide-image"> -->
                                 <div class="slide-content">
-                                    <div class="slide-icon" aria-hidden="true">
+                                    <div class="slide-icon">
                                         <i class="fas fa-database"></i>
                                     </div>
                                     <h3 class="slide-title">Database Design</h3>
@@ -84,21 +83,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-nav" aria-label="Carousel controls">
-                            <button class="carousel-dot active" aria-label="Slide 1"></button>
-                            <button class="carousel-dot" aria-label="Slide 2"></button>
-                            <button class="carousel-dot" aria-label="Slide 3"></button>
+                        <div class="carousel-nav">
+                            <div class="carousel-dot active"></div>
+                            <div class="carousel-dot"></div>
+                            <div class="carousel-dot"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <!-- About Page -->
-        <section class="page about-page" id="about" aria-labelledby="about-title">
+        <div class="page about-page" id="about">
             <div class="about-container">
                 <div class="about-text">
-                    <h2 class="about-title" id="about-title">About Me</h2>
+                    <h2 class="about-title">About Me</h2>
                     <p class="about-description">
                         I'm a passionate full-stack developer with expertise in modern web technologies. 
                         My journey in software development has equipped me with a strong foundation in both frontend and backend technologies, 
@@ -130,27 +129,27 @@
                                 <div class="skill-name">{{ skill.name }}</div>
                             </div>
                             <div class="skill-progress">
-                                <div class="skill-bar" style="width: {{ skill.level }}%" aria-label="{{ skill.name }} skill level: {{ skill.level }}%"></div>
+                                <div class="skill-bar" style="width: {{ skill.level }}%"></div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
         
         <!-- Companies Page -->
-        <section class="page companies-page" id="companies" aria-labelledby="companies-title">
+        <div class="page companies-page" id="companies">
             <div class="companies-container">
                 <div class="companies-header">
-                    <h2 class="companies-title" id="companies-title">Projects & Experience</h2>
+                    <h2 class="companies-title">Projects & Experience</h2>
                     <p>My professional journey and contributions</p>
                 </div>
                 <div class="companies-grid">
                     {% for project in user.projects %}
-                    <article class="company-card">
+                    <div class="company-card">
                         <div class="company-image">
-                            <i class="fas fa-project-diagram company-icon" aria-hidden="true"></i>
+                            <i class="fas fa-project-diagram company-icon"></i>
                         </div>
                         <div class="company-content">
                             <h3 class="company-name">{{ project.title }}</h3>
@@ -162,156 +161,131 @@
                             </div>
                             <div class="company-links">
                                 {% if project.github %}
-                                <a href="{{ project.github }}" class="company-link" target="_blank" rel="noopener noreferrer">
+                                <a href="{{ project.github }}" class="company-link" target="_blank">
                                     <i class="fab fa-github"></i>
                                     View Code
                                 </a>
                                 {% endif %}
                                 {% if project.demo %}
-                                <a href="{{ project.demo }}" class="company-link" target="_blank" rel="noopener noreferrer">
+                                <a href="{{ project.demo }}" class="company-link" target="_blank">
                                     <i class="fas fa-external-link-alt"></i>
                                     Live Demo
                                 </a>
                                 {% endif %}
                             </div>
                         </div>
-                    </article>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
-        </section>
+        </div>
         
         <!-- Contact Page -->
-        <section class="page contact-page" id="contact" aria-labelledby="contact-title">
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h2 class="contact-title" id="contact-title">Get In Touch</h2>
-                    <p class="contact-description">
-                        Schedule a Meeting.
-                    </p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-item-text">
-                                <a href="mailto:{{ user.contact.email }}">{{ user.contact.email }}</a>
-                            </div>
+        <div class="page contact-page" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="contact-title">Get In Touch</h2>
+                <p class="contact-description">
+                    Have a project in mind or want to discuss potential opportunities?
+                </p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-envelope"></i>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-item-text">
-                                <a href="https://www.google.com/maps/search/?api=1&query={{ user.location }}" target="_blank">
-                                    {{ user.location }}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="contact-item-text">
-                                <a href="tel:{{ user.contact.phone }}">{{ user.contact.phone }}</a>
-                            </div>
+                        <div class="contact-item-text">
+                            <a href="mailto:{{ user.contact.email }}">{{ user.contact.email }}</a>
                         </div>
                     </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-item-text">
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ user.location }}" target="_blank">
+                                {{ user.location }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-item-text">
+                            <a href="tel:{{ user.contact.phone }}">{{ user.contact.phone }}</a>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-item-text">{{ user.contact.email }}</div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-item-text">{{ user.location }}</div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-item-icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="contact-item-text">{{ user.contact.phone }}</div>
-                        </div>
-                    </div> -->
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm" action="/api/contact" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="Enter subject" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Enter your message" required aria-required="true"></textarea>
-                        </div>
-                        <button type="submit" class="form-submit" id="submit-btn">
-                            <span class="btn-text">Send Message</span>
-                            <span class="loading-spinner" aria-hidden="true" style="display: none;">
-                                <i class="fas fa-spinner fa-spin"></i>
-                            </span>
-                        </button>
-                    </form>
-                </div>
             </div>
-        </section>
+            <div class="contact-form">
+                <form id="contactForm" action="/api/contact" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
         
         <!-- Blog Page -->
-        <section class="page blog-page" id="blog" aria-labelledby="blog-title">
+        <div class="page blog-page" id="blog">
             <div class="blog-container">
                 <div class="blog-header">
-                    <h2 class="blog-title" id="blog-title">Latest Articles</h2>
+                    <h2 class="blog-title">Latest Articles</h2>
                     <p>Thoughts on web development, technology trends, and best practices</p>
                 </div>
                 <div class="blog-grid">
-                    <article class="blog-card">
+                    <div class="blog-card">
                         <div class="blog-image">
-                            <i class="fas fa-code blog-image-icon" aria-hidden="true"></i>
+                            <i class="fas fa-code blog-image-icon"></i>
                         </div>
                         <div class="blog-content">
                             <div class="blog-date">June 15, 2025</div>
                             <h3 class="blog-card-title">Building Scalable APIs with Django REST Framework</h3>
                             <p class="blog-excerpt">Learn how to design and implement high-performance APIs that can handle thousands of requests per second using Django REST Framework.</p>
-                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
-                    </article>
-                    <article class="blog-card">
+                    </div>
+                    <div class="blog-card">
                         <div class="blog-image">
-                            <i class="fab fa-react blog-image-icon" aria-hidden="true"></i>
+                            <i class="fab fa-react blog-image-icon"></i>
                         </div>
                         <div class="blog-content">
                             <div class="blog-date">May 28, 2025</div>
                             <h3 class="blog-card-title">State Management in Modern React Applications</h3>
                             <p class="blog-excerpt">Exploring different state management solutions and when to use Context API, Redux, or Zustand for your React projects.</p>
-                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
-                    </article>
-                    <article class="blog-card">
+                    </div>
+                    <div class="blog-card">
                         <div class="blog-image">
-                            <i class="fas fa-server blog-image-icon" aria-hidden="true"></i>
+                            <i class="fas fa-server blog-image-icon"></i>
                         </div>
                         <div class="blog-content">
                             <div class="blog-date">May 10, 2025</div>
                             <h3 class="blog-card-title">Microservices Architecture: Best Practices</h3>
                             <p class="blog-excerpt">A practical guide to designing and implementing microservices that communicate effectively while maintaining independence.</p>
-                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
                         </div>
-                    </article>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <script>
@@ -323,14 +297,6 @@
                 
                 const formData = new FormData(contactForm);
                 const formDataObj = Object.fromEntries(formData.entries());
-                const submitBtn = document.getElementById('submit-btn');
-                const btnText = submitBtn.querySelector('.btn-text');
-                const spinner = submitBtn.querySelector('.loading-spinner');
-                
-                // Show loading state
-                btnText.style.display = 'none';
-                spinner.style.display = 'inline-block';
-                submitBtn.disabled = true;
                 
                 try {
                     const response = await fetch('/api/contact', {
@@ -352,15 +318,9 @@
                 } catch (error) {
                     alert('An error occurred. Please try again.');
                     console.error('Error:', error);
-                } finally {
-                    // Hide loading state
-                    btnText.style.display = 'inline';
-                    spinner.style.display = 'none';
-                    submitBtn.disabled = false;
                 }
             });
         }
-        
         // Page Navigation
         document.addEventListener('DOMContentLoaded', function() {
             // Elements
@@ -374,41 +334,22 @@
                 // Hide all pages
                 pages.forEach(page => {
                     page.classList.remove('active');
-                    page.setAttribute('aria-hidden', 'true');
                 });
                 
                 // Remove active class from all nav links
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    link.removeAttribute('aria-current');
                 });
                 
                 // Show target page
-                const targetPage = document.getElementById(pageId);
-                if (targetPage) {
-                    targetPage.classList.add('active');
-                    targetPage.setAttribute('aria-hidden', 'false');
-                    
-                    // Add active class to clicked nav link
-                    const targetLink = document.querySelector(`.nav-link[href="#${pageId}"]`);
-                    if (targetLink) {
-                        targetLink.classList.add('active');
-                        targetLink.setAttribute('aria-current', 'page');
-                    }
-                    
-                    // Close mobile menu if open
-                    navMenu.classList.remove('active');
-                    mobileToggle.classList.remove('active');
-                    mobileToggle.setAttribute('aria-expanded', 'false');
-                    
-                    // Focus on main content for accessibility
-                    if (pageId !== 'home') {
-                        const mainHeading = targetPage.querySelector('h1, h2');
-                        if (mainHeading) {
-                            mainHeading.focus();
-                        }
-                    }
-                }
+                document.getElementById(pageId).classList.add('active');
+                
+                // Add active class to clicked nav link
+                document.querySelector(`.nav-link[href="#${pageId}"]`).classList.add('active');
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+                mobileToggle.classList.remove('active');
             }
             
             // Add event listeners to nav links
@@ -422,9 +363,8 @@
             
             // Mobile menu toggle
             mobileToggle.addEventListener('click', function() {
-                const isExpanded = this.classList.toggle('active') ? 'true' : 'false';
+                this.classList.toggle('active');
                 navMenu.classList.toggle('active');
-                this.setAttribute('aria-expanded', isExpanded);
             });
             
             // Home page carousel functionality
@@ -434,74 +374,66 @@
             
             // Function to show slide
             function showSlide(index) {
-                // Update slide visibility
-                const slides = document.querySelectorAll('.carousel-slide');
-                slides.forEach((slide, i) => {
-                    slide.setAttribute('aria-hidden', i !== index);
-                });
-                
-                // Update slide position
                 carouselSlides.style.transform = `translateX(-${index * 100}%)`;
                 
                 // Update active dot
                 carouselDots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === index);
-                    dot.setAttribute('aria-pressed', i === index ? 'true' : 'false');
                 });
-                
-                currentSlide = index;
             }
             
             // Add event listeners to dots
             carouselDots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
-                    showSlide(index);
+                    currentSlide = index;
+                    showSlide(currentSlide);
                 });
             });
             
             // Auto slide
-            const carouselInterval = setInterval(() => {
-                const nextSlide = (currentSlide + 1) % carouselDots.length;
-                showSlide(nextSlide);
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % carouselDots.length;
+                showSlide(currentSlide);
             }, 5000);
             
-            // Pause auto slide on hover
-            carouselSlides.addEventListener('mouseenter', () => {
-                clearInterval(carouselInterval);
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    
+                    // Show success message
+                    alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you at ${email} soon.`);
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+            
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetPage = document.getElementById(targetId);
+                    
+                    if (targetPage) {
+                        // Navigate to page
+                        navigateToPage(targetId);
+                        
+                        // Scroll to top of the page
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
-            
-            carouselSlides.addEventListener('mouseleave', () => {
-                carouselInterval = setInterval(() => {
-                    const nextSlide = (currentSlide + 1) % carouselDots.length;
-                    showSlide(nextSlide);
-                }, 5000);
-            });
-            
-            // Initialize carousel
-            showSlide(0);
-            
-            // Skip navigation functionality
-            document.querySelector('.skip-nav').addEventListener('click', function(e) {
-                e.preventDefault();
-                const mainContent = document.querySelector('main');
-                if (mainContent) {
-                    mainContent.focus();
-                }
-            });
-            
-            // Theme switcher (optional)
-            const themeToggle = document.createElement('button');
-            themeToggle.className = 'theme-toggle';
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            themeToggle.setAttribute('aria-label', 'Toggle dark mode');
-            themeToggle.addEventListener('click', () => {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-                themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-                themeToggle.setAttribute('aria-label', isDark ? 'Switch to dark mode' : 'Switch to light mode');
-            });
-            
-            document.body.appendChild(themeToggle);
         });
     </script>
 </body>
