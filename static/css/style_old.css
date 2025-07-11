@@ -1,3 +1,14 @@
+:root {
+    --navbar-height: 80px;
+    --primary-gradient: linear-gradient(45deg, #667eea, #764ba2);
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+}
+
+html {
+    scroll-padding-top: 80px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,11 +23,19 @@ body {
     height: 100vh;
 }
 
+@media (prefers-color-scheme: light) {
+    body {
+        background: #f9f9f9;
+        color: #222;
+    }
+}
+
 /* Navigation */
 .nav {
     position: fixed;
     top: 0;
     width: 100%;
+    height: 80px;
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(20px);
     z-index: 1000;
@@ -30,7 +49,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    height: 80px;
 }
 
 .nav-brand {
@@ -94,8 +113,8 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s ease;
-    padding-top: 80px;
     overflow-y: auto;
+    padding-top: var(--navbar-height);
 }
 
 .page.active {
@@ -201,6 +220,11 @@ body {
     transform: translateY(-2px);
 }
 
+.btn:focus, .nav-link:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
 .home-visual {
     position: relative;
     height: 500px;
@@ -219,7 +243,8 @@ body {
 .carousel-slides {
     display: flex;
     height: 100%;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
 .carousel-slide {
@@ -570,21 +595,6 @@ body {
     border: 1px solid rgba(102, 126, 234, 0.2);
 }
 
-.contact-item-text a {
-    color: inherit;            /* Use the parent’s color */
-    text-decoration: none;     /* Remove underline */
-    display: block;            /* Make the whole area clickable */
-    padding: 0.5em;            /* Add some padding if needed */
-    transition: color 0.3s, background 0.3s;
-}
-
-.contact-item-text a:hover {
-    color: #8f5cff;            /* Change text color on hover (choose your accent color) */
-    background-color: rgba(255, 255, 255, 0.1); /* Optional subtle background on hover */
-    border-radius: 8px;        /* Optional rounded corners */
-}
-
-
 .contact-item-icon {
     font-size: 1.5rem;
     color: #667eea;
@@ -773,6 +783,16 @@ body {
     border-radius: 2px;
 }
 
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
 /* Animations */
 @keyframes slideInLeft {
     from { transform: translateX(-50px); opacity: 0; }
@@ -854,5 +874,109 @@ body {
     
     .home-buttons {
         justify-content: center;
+    }
+}
+
+/* Light Mode Overrides */
+@media (prefers-color-scheme: light) {
+    .nav {
+        background: rgba(249, 249, 249, 0.95);
+        border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .nav-link {
+        color: #222;
+    }
+
+    .home-page {
+        background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%);
+    }
+
+    .home-page::before {
+        background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+    }
+
+    .home-subtitle {
+        color: #666;
+    }
+
+    .about-page {
+        background: #f0f0f0;
+    }
+
+    .about-description,
+    .stat-label {
+        color: #666;
+    }
+
+    .stat-item,
+    .skill-item {
+        background: rgba(102, 126, 234, 0.05);
+        border-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .companies-page {
+        background: #f9f9f9;
+    }
+
+    .company-card {
+        background: #fff;
+        border-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .company-name {
+        color: #222;
+    }
+
+    .company-description {
+        color: #666;
+    }
+
+    .contact-page {
+        background: #f0f0f0;
+    }
+
+    .contact-description,
+    .contact-item-text {
+        color: #222;
+    }
+
+    .contact-item {
+        background: rgba(102, 126, 234, 0.05);
+        border-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .contact-form {
+        background: #fff;
+        border-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group label {
+        color: #666;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        background: #f9f9f9;
+        color: #222;
+        border-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .blog-page {
+        background: #f9f9f9;
+    }
+
+    .blog-card {
+        background: #fff;
+        border-color: rgba(102, 126, 234, 0.1);
+    }
+
+    .blog-card-title {
+        color: #222;
+    }
+
+    .blog-excerpt {
+        color: #666;
     }
 }
