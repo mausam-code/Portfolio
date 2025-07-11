@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.name }} | {{user.title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Add favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <!-- Fallback favicon (if the above is not found) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>S</text></svg>">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand"><a href="#home">{{ user.name }}</a></div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+                <li><a href="#companies" class="nav-link">Companies</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+            </ul>
+            <div class="mobile-nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Home Page -->
+        <div class="page home-page active" id="home">
+            <div class="home-content">
+                <div class="home-text">
+                    <h1 class="home-title">Hi, I'm <span class="gradient-text">{{ user.name }}</span></h1>
+                    <p class="home-subtitle">{{ user.bio }}</p>
+                    <div class="home-buttons">
+                        <a href="#companies" class="btn btn-primary">
+                            <i class="fas fa-briefcase"></i>
+                            View My Establishments
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="home-visual">
+                    <div class="carousel-container">
+                        <div class="carousel-slides">
+                            <!-- <img src="{{ url_for('static', filename='images/python.jpg') }}" alt="Python Development" class="slide-image"> -->
+                            <div class="carousel-slide">
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <i class="fab fa-python"></i>
+                                    </div>
+                                    <h3 class="slide-title">Python Development</h3>
+                                    <p class="slide-subtitle">Building robust backend solutions</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <!-- <img src="{{ url_for('static', filename='images/react.jpg') }}" alt="React Frontend" class="slide-image"> -->
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <i class="fab fa-react"></i>
+                                    </div>
+                                    <h3 class="slide-title">React Frontend</h3>
+                                    <p class="slide-subtitle">Creating dynamic user interfaces</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <!-- <img src="{{ url_for('static', filename='images/database.jpg') }}" alt="Database Design" class="slide-image"> -->
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <h3 class="slide-title">Database Design</h3>
+                                    <p class="slide-subtitle">Optimizing data architecture</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-nav">
+                            <div class="carousel-dot active"></div>
+                            <div class="carousel-dot"></div>
+                            <div class="carousel-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div class="page about-page" id="about">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="about-title">About Me</h2>
+                    <p class="about-description">
+                        I'm a passionate full-stack developer with expertise in modern web technologies. 
+                        My journey in software development has equipped me with a strong foundation in both frontend and backend technologies, 
+                        allowing me to build complete web applications from concept to deployment.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">{{ user.skills|length }}+</div>
+                            <div class="stat-label">Technologies</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">{{ user.projects | length }}+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">{{ user.experience | length }}+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-skills">
+                    <div class="skills-grid">
+                        {% for skill in user.skills %}
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-icon">
+                                    <i class="fab fa-{{ skill.name|lower }}"></i>
+                                </div>
+                                <div class="skill-name">{{ skill.name }}</div>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-bar" style="width: {{ skill.level }}%"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Companies Page -->
+        <div class="page companies-page" id="companies">
+            <div class="companies-container">
+                <div class="companies-header">
+                    <h2 class="companies-title">Projects & Experience</h2>
+                    <p>My professional journey and contributions</p>
+                </div>
+                <div class="companies-grid">
+                    {% for project in user.projects %}
+                    <div class="company-card">
+                        <div class="company-image">
+                            <i class="fas fa-project-diagram company-icon"></i>
+                        </div>
+                        <div class="company-content">
+                            <h3 class="company-name">{{ project.title }}</h3>
+                            <p class="company-description">{{ project.description }}</p>
+                            <div class="company-tech">
+                                {% for tech in project.technologies %}
+                                <span class="tech-tag">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="company-links">
+                                {% if project.github %}
+                                <a href="{{ project.github }}" class="company-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                    View Code
+                                </a>
+                                {% endif %}
+                                {% if project.demo %}
+                                <a href="{{ project.demo }}" class="company-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Live Demo
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Page -->
+        <div class="page contact-page" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="contact-title">Get In Touch</h2>
+                <p class="contact-description">
+                    Have a project in mind or want to discuss potential opportunities?
+                </p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-item-text">{{ user.contact.email }}</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-item-text">{{ user.location }}</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-item-text">{{ user.contact.phone }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm" action="/api/contact" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        
+        <!-- Blog Page -->
+        <div class="page blog-page" id="blog">
+            <div class="blog-container">
+                <div class="blog-header">
+                    <h2 class="blog-title">Latest Articles</h2>
+                    <p>Thoughts on web development, technology trends, and best practices</p>
+                </div>
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-code blog-image-icon"></i>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">June 15, 2025</div>
+                            <h3 class="blog-card-title">Building Scalable APIs with Django REST Framework</h3>
+                            <p class="blog-excerpt">Learn how to design and implement high-performance APIs that can handle thousands of requests per second using Django REST Framework.</p>
+                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="fab fa-react blog-image-icon"></i>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">May 28, 2025</div>
+                            <h3 class="blog-card-title">State Management in Modern React Applications</h3>
+                            <p class="blog-excerpt">Exploring different state management solutions and when to use Context API, Redux, or Zustand for your React projects.</p>
+                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <i class="fas fa-server blog-image-icon"></i>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">May 10, 2025</div>
+                            <h3 class="blog-card-title">Microservices Architecture: Best Practices</h3>
+                            <p class="blog-excerpt">A practical guide to designing and implementing microservices that communicate effectively while maintaining independence.</p>
+                            <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update the contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                const formDataObj = Object.fromEntries(formData.entries());
+                
+                try {
+                    const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formDataObj)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        alert(result.message || 'Message sent successfully!');
+                        contactForm.reset();
+                    } else {
+                        alert(result.error || 'Failed to send message');
+                    }
+                } catch (error) {
+                    alert('An error occurred. Please try again.');
+                    console.error('Error:', error);
+                }
+            });
+        }
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const mobileToggle = document.querySelector('.mobile-nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            // Navigation function
+            function navigateToPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Remove active class from all nav links
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Show target page
+                document.getElementById(pageId).classList.add('active');
+                
+                // Add active class to clicked nav link
+                document.querySelector(`.nav-link[href="#${pageId}"]`).classList.add('active');
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+                mobileToggle.classList.remove('active');
+            }
+            
+            // Add event listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    navigateToPage(pageId);
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Home page carousel functionality
+            const carouselSlides = document.querySelector('.carousel-slides');
+            const carouselDots = document.querySelectorAll('.carousel-dot');
+            let currentSlide = 0;
+            
+            // Function to show slide
+            function showSlide(index) {
+                carouselSlides.style.transform = `translateX(-${index * 100}%)`;
+                
+                // Update active dot
+                carouselDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+            
+            // Add event listeners to dots
+            carouselDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            // Auto slide
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % carouselDots.length;
+                showSlide(currentSlide);
+            }, 5000);
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    
+                    // Show success message
+                    alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you at ${email} soon.`);
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+            
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetPage = document.getElementById(targetId);
+                    
+                    if (targetPage) {
+                        // Navigate to page
+                        navigateToPage(targetId);
+                        
+                        // Scroll to top of the page
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

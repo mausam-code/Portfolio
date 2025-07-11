@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from datetime import datetime
 import json
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 # Enhanced user data with more professional information
 user_data = {
@@ -22,37 +23,37 @@ user_data = {
     'experience': [
         {
             'title': 'Full-Stack Developer',
-            'company': 'Tech Solutions Inc.',
+            'company': 'Technology Pvt. Ltd.',
             'period': '2022 - Present',
             'description': 'Developed and maintained web applications using Django and React. Collaborated with cross-functional teams to deliver high-quality software solutions.'
         },
         {
-            'title': 'Junior Developer',
-            'company': 'Digital Agency',
-            'period': '2021 - 2022',
+            'title': 'Developer',
+            'company': 'Digital Sansar',
+            'period': '2011 - Present',
             'description': 'Built responsive websites and worked on various client projects. Gained experience in full-stack development and agile methodologies.'
         }
     ],
     'projects': [
         {
             'title': 'Seasonal Agro Farm',
-            'description': 'Full-stack solution built with Django and React, featuring user authentication, payment integration, and admin dashboard.',
+            'description': "Season's Farmhouse Located in Siraha,Nepal.",
             'technologies': ['Django', 'React', 'MySQL', 'Stripe API'],
-            'github': 'https://github.com/mausam-code/Portfolio',
+            'github': 'https://github.com/mausam-code/Agro-Farm',
             'demo': 'https://seasonalagrofarm.com.np',
             'image': 'ecommerce.jpg'
         },
         {
-            'title': 'FOREIGN EMPLOYMENT MANAGEMENT SYSTEM',
-            'description': 'Modern blogging platform with rich text editor, comment system, and social sharing features built with Flask and React.',
+            'title': 'FANCY DECOR',
+            'description': 'A Decoration Company Located in Doha, Qatar.',
             'technologies': ['Flask', 'React', 'PostgreSQL', 'REST API'],
             'github': 'https://github.com/mausam-code/',
             'demo': 'https://fancydecor.qa',
             'image': 'blog.jpg'
         },
         {
-            'title': 'Analytics Dashboard',
-            'description': 'Data visualization dashboard with real-time analytics, interactive charts, and export functionality.',
+            'title': 'J.K OVERSEAS PVT. LTD.',
+            'description': 'A Manpower Agency Situated in Kathmandu,Nepal. ',
             'technologies': ['Python', 'Django', 'MySQL', 'Chart.js'],
             'github': 'https://github.com/mausam-code/analytics-dashboard',
             'demo': 'https://jkoverseas.com.np',
@@ -64,15 +65,15 @@ user_data = {
             'degree': 'Bachelor of Computer Science',
             'institution': 'Tribhuvan University',
             'year': '2020',
-            'description': 'Specialized in software engineering and web development'
+            'description': 'Specialized in software development and web development'
         }
     ],
     'contact': {
         'email': 'seasonsinghrajak@gmail.com',
-        'phone': '+977-9841234567',
+        'phone': '+977-9803645644',
         'github': 'https://github.com/mausam-code',
         'linkedin': 'https://linkedin.com/in/seasonsinghrajak',
-        'website': 'https://seasonsingh.dev'
+        'website': 'https://season.name.np'
     },
     'testimonials': [
         {
@@ -95,7 +96,7 @@ user_data = {
 @app.route('/')
 def home():
     """Main portfolio page"""
-    return render_template('profile.html', user=user_data)
+    return render_template('main.html', user=user_data)
 
 @app.route('/api/contact', methods=['POST'])
 def handle_contact():
@@ -119,21 +120,33 @@ def handle_contact():
         }
         
         # Save to a simple JSON file (in production, use a proper database)
+        messages_file = 'message.json'
         try:
-            with open('messages.json', 'r') as f:
+            with open(messages_file, 'r') as f:
                 messages = json.load(f)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
             messages = []
         
         messages.append(contact_message)
         
-        with open('messages.json', 'w') as f:
+        with open(messages_file, 'w') as f:
             json.dump(messages, f, indent=2)
         
-        return jsonify({'success': True, 'message': 'Message sent successfully!'})
+        return jsonify({
+            'success': True, 
+            'message': 'I will get back to you soon!'
+        })
     
     except Exception as e:
-        return jsonify({'error': 'Something went wrong. Please try again.'}), 500
+        app.logger.error(f"Error processing contact form: {str(e)}")
+        return jsonify({
+            'error': 'Something went wrong. Please try again.'
+        }), 500
+    
+# serve static files
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
 
 @app.route('/api/skills')
 def get_skills():
@@ -173,4 +186,7 @@ def inject_user_data():
     return dict(user=user_data)
 
 if __name__ == '__main__':
+    # Create static directory if it doesn't exist
+    if not os.path.exists('static'):
+        os.makedirs('static')
     app.run(debug=True, host='0.0.0.0', port=5000)
